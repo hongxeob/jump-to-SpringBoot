@@ -3,6 +3,7 @@ package com.mywebysite.mywebsite_springboot;
 import com.mywebysite.mywebsite_springboot.answer.Answer;
 import com.mywebysite.mywebsite_springboot.answer.AnswerRepository;
 import com.mywebysite.mywebsite_springboot.quesqtion.QuestionRepository;
+import com.mywebysite.mywebsite_springboot.quesqtion.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,16 +16,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class MywebsiteSpringbootApplicationTests {
     @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private AnswerRepository answerRepository;
+    private QuestionService questionService;
 
     @Test
     void testJpa() {
-        Optional<Answer> oa = this.answerRepository.findById(1);
-        assertTrue(oa.isPresent());
-        Answer a = oa.get();
-        assertEquals(2, a.getQuestion().getId());
+        for (int i = 1; i <= 300; i++) {
+            String subject = String.format("테스트 데이터입니다: [%03d]", i);
+            String content = "내용 무";
+            this.questionService.create(subject, content);
+        }
     }
-
 }
