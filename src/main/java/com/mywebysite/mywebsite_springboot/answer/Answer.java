@@ -1,6 +1,7 @@
 package com.mywebysite.mywebsite_springboot.answer;
 
 import com.mywebysite.mywebsite_springboot.quesqtion.Question;
+import com.mywebysite.mywebsite_springboot.user.SiteUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,4 +23,7 @@ public class Answer {
 
     @ManyToOne
     private Question question;
+
+    @ManyToOne
+    private SiteUser author;
 }

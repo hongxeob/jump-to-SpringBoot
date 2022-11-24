@@ -1,6 +1,7 @@
 package com.mywebysite.mywebsite_springboot.quesqtion;
 
 import com.mywebysite.mywebsite_springboot.answer.Answer;
+import com.mywebysite.mywebsite_springboot.user.SiteUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +27,8 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // 질문 하나에는 여러개의 답변이 작성 될수 이 ㅆ다. 이때 질문을 삭제하면 그에 달린 답변들도 모두 삭제하게 위함.
     private List<Answer> answerList;
+
+    @ManyToOne
+    private SiteUser author;
 
 }

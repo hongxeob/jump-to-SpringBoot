@@ -1,8 +1,9 @@
 package com.mywebysite.mywebsite_springboot.quesqtion;
 
 import com.mywebysite.mywebsite_springboot.DataNotFoundException;
+import com.mywebysite.mywebsite_springboot.user.SiteUser;
+import com.mywebysite.mywebsite_springboot.user.UserRole;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.criterion.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.zip.DataFormatException;
 
 @Service
 @RequiredArgsConstructor // final이 붙은 속성을 포함하는 생성자를 자동으로 생성하는 역할
@@ -31,11 +31,12 @@ public class QuestionService {
         } else throw new DataNotFoundException("question not found");
     }
 
-    public void create(String subject, String content) {
+    public void create(String subject, String content, SiteUser user) {
         Question q = new Question();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
+        q.setAuthor(user);
         this.questionRepository.save(q);
     }
 
